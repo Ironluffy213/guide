@@ -36,14 +36,14 @@ public class USACOPromotionCounting {
 		b1 += register;
 		
 		int bs = b1-b2;
-		System.out.println(bs);
+		out.println(bs);
 		s1 += bs;
 		
 		int sg = s1-s2;
-		System.out.println(sg);
+		out.println(sg);
 		g1 += sg;
 		
 		int gp = g1-g2;
-		System.out.println(gp);
+		out.println(gp);
 	}
 }
