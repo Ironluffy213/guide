@@ -34,7 +34,7 @@ public class USACOWordProcessor {
 			out.println(og[0]);
 		}else {
 			for(int i = 0; i < og.length; i++) {
-				if(len + og[i].length() < k || len + og[i].length() == k) {
+				if(len + og[i].length() <= k) {
 					let.add(og[i]);
 					len += og[i].length();
 				}else {

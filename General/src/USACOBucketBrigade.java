@@ -41,35 +41,8 @@ public class USACOBucketBrigade {
 	
 	static void solve() {
 		int cnt = 0;
-		if(bx > lx && by > ly) {
-			while(by != ly) {
-				lx++;
-				ly++;
-				cnt += 2;
-			}
-			cnt = cnt + Math.abs(bx-lx);
-		}else if(bx > lx && by < ly) {
-			while(by != ly) {
-				lx++;
-				ly--;
-				cnt += 2;
-			}
-			cnt = cnt + Math.abs(bx-lx);
-		}else if(bx < lx && by > ly) {
-			while(by != ly) {
-				lx--;
-				ly++;
-				cnt += 2;
-			}
-			cnt = cnt + Math.abs(bx-lx);
-		}else if(bx < lx && by < ly) {
-			while(by != ly) {
-				lx--;
-				ly--;
-				cnt += 2;
-			}
-			cnt = cnt + Math.abs(bx-lx);
-		}else if(bx == lx) {
+		cnt = Math.abs(bx-lx) + Math.abs(by-ly);
+		if(bx == lx) {
 			cnt = Math.abs(by-ly);
 			if(rx == lx && ((ry < by && ry > ly) || (ry < ly && ry > by))) {
 				cnt += 2;
