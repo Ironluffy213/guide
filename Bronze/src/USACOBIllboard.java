@@ -4,7 +4,7 @@ import java.util.*;
 public class USACOBIllboard {
 	static Scanner in;
 	static PrintWriter out;
-	static long[] c;
+	static boolean[][] a;
 	
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		in = new Scanner(new File("billboard.in"));
@@ -18,36 +18,55 @@ public class USACOBIllboard {
 	}
 	
 	static void init() {
-		c = new long[8];
-		for(int i = 0; i < 8; i++) {
-			c[i] = (long)in.nextInt() + 1000l;
+		a = new boolean[2001][2001];
+		
+		int x1 = in.nextInt()+1000;
+		int y1 = in.nextInt()+1000;
+		int x2 = in.nextInt()+1000;
+		int y2 = in.nextInt()+1000;
+	
+		
+		for(int i = x1; i < x2; i++) {
+			for(int j = y1; j < y2; j++) {
+				a[i][j] = true;
+			}
+		}
+		
+		x1 = in.nextInt()+1000;
+		y1 = in.nextInt()+1000;
+		x2 = in.nextInt()+1000;
+		y2 = in.nextInt()+1000;
+		
+		for(int i = x1; i < x2; i++) {
+			for(int j = y1; j < y2; j++) {
+				a[i][j] = false;
+			}
 		}
 	}
 	
 	static void solve() {
-		long la = Math.abs(c[0]-c[2])*Math.abs(c[1]-c[3]);
+		int x1 = 2000;
+		int x2 = 0;
+		int y1 = 2000;
+		int y2 = 0;
+		boolean f = false;
 		
-		long trax = Math.min(c[0], c[2]);
-		long tray = Math.min(c[1], c[3]);
-		
-		long blax = Math.max(c[0], c[2]);
-		long blay = Math.max(c[1], c[3]);
-		
-		long trbx = Math.min(c[4], c[6]);
-		long trby = Math.min(c[5], c[7]);
-
-		long blbx = Math.min(c[4], c[6]);
-		long blby = Math.min(c[5], c[7]);
-		
-		long w = Math.min(trax, trbx) - Math.max(blax, blbx);
-		long l = Math.min(tray, trby) - Math.max(blay, blby);
-		
-		long ia = 0;
-		if(w > 0 && l > 0) {
-			ia = w * l;
+		for(int i = 0; i <= 2000; i++) {
+			for(int j = 0; j <= 2000; j++) {
+				if(a[i][j]) {
+					x1 = Math.min(x1,  i);
+					y1 = Math.min(y1,  j);
+					x2 = Math.max(x2,  i);
+					y2 = Math.max(y2,  j);
+					f = true;
+				}
+			}
 		}
-		la = la - ia;
 		
-		out.println(la);
+		if(f) {
+			out.println((x2-x1+1)*(y2-y1+1));
+		}else {
+			out.println(0);
+		}
 	}
 }
