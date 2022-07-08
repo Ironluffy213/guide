@@ -47,7 +47,7 @@ public class USACOSpeeding {
 				ind++;
 			}
 		}
-		System.out.println(Arrays.toString(s));
+		//System.out.println(Arrays.toString(s));
 	}
 	
 	static void solve() {
