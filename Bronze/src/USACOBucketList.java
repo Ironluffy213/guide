@@ -29,7 +29,7 @@ public class USACOBucketList {
 				b[j] += num;
 			}
 		}
-		System.out.println(Arrays.toString(b));
+		//System.out.println(Arrays.toString(b));
 	}
 	
 	static void solve() {
