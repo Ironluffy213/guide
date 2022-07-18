@@ -21,36 +21,25 @@ public class USACOLostCow {
 	static void init() {
 		x = in.nextInt();
 		y = in.nextInt();
-		if(x > y) {
-			g = true;
-		}else {
-			g = false;
-		}
 	}
 	
 	static void solve() {
-		int i = 0;
+		int m = 1;
+		int cur = x;
 		int d = 0;
-		int p  = 0;
 		while(true) {
-			if(x == y) {
+			int next = x + m;
+			if(cur <= y && y <= next) {
+				d += Math.abs(y-cur);
 				break;
 			}
-			d += (int) (Math.pow(2,  i)+p);
-			p = (int) (Math.pow(-1, i)*Math.pow(2,  i));
-			i++;
-			if(g) {
-				if(p+x < y) {
-					d -= y-(p+x);
-					break;
-				}
-			}else {
-				if(p+x > y) {
-					d -= (p+x)-y;
-					break;
-				}
+			if(cur > y && y > next) {
+				d += Math.abs(y-cur);
+				break;
 			}
-			p = Math.abs(p);
+			d += Math.abs(next-cur);
+			cur = next;
+			m *= -2;
 		}
 		out.println(d);
 	}
