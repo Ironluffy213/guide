@@ -4,9 +4,10 @@ import java.util.*;
 public class USACOMilkMeasurement {
 	static Scanner in;
 	static PrintWriter out;
-	static int n, ind;
+	static int n;
 	static triple[] m;
 	static int[] amt;
+	static boolean[] big;
 	
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		in = new Scanner(new File("measurement.in"));
@@ -23,8 +24,8 @@ public class USACOMilkMeasurement {
 		n = Integer.parseInt(in.nextLine());
 		m = new triple[n];
 		amt = new int[3];
+		big = new boolean[3];
 		int max = -999999999;
-		ind = 0;
 		
 		for(int i = 0; i < n; i++) {
 			String[] temp = in.nextLine().split(" ");
@@ -49,7 +50,13 @@ public class USACOMilkMeasurement {
 		for(int i = 0; i < 3; i++) {
 			if(amt[i] > max) {
 				max = amt[i];
-				ind = i;
+			}
+		}
+		for(int i = 0; i < 3; i++) {
+			if(amt[i] == max) {
+				big[i] = true;
+			}else {
+				big[i] = false;
 			}
 		}
 	}
@@ -57,6 +64,7 @@ public class USACOMilkMeasurement {
 	static void solve() {
 		int cnt = 0;
 		for(int i = 1; i < n; i++) {
+			boolean[] c = new boolean[3];
 			if(m[i].name.equals("Bessie")) {
 				amt[0] += m[i].b;
 			}else if(m[i].name.equals("Elsie")) {
@@ -66,19 +74,26 @@ public class USACOMilkMeasurement {
 			}
 			
 			int max = -999999999;
-			int ti = 0;
 			for(int j = 0; j < 3; j++) {
 				if(amt[j] > max) {
 					max = amt[j];
-					ti = j;
 				}
 			}
-			if(ti != ind) {
+			for(int j = 0; j < 3; j++) {
+				if(amt[j] == max) {
+					c[j] = true;
+				}else {
+					c[j] = false;
+				}
+			}
+			if(!c.equals(big)) {
 				cnt++;
-				ind = ti;
+			}
+			for(int j = 0; j < 3; j++) {
+				big[j] = c[j];
 			}
 		}
-		out.println(cnt+1);
+		out.println(cnt);
 	}
 	
 	static class triple implements Comparable<triple> {
