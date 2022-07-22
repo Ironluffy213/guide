@@ -62,7 +62,7 @@ public class USACOMilkMeasurement {
 	}
 	
 	static void solve() {
-		int cnt = 0;
+		int cnt = 1;
 		for(int i = 1; i < n; i++) {
 			boolean[] c = new boolean[3];
 			if(m[i].name.equals("Bessie")) {
@@ -86,7 +86,7 @@ public class USACOMilkMeasurement {
 					c[j] = false;
 				}
 			}
-			if(!c.equals(big)) {
+			if(!Arrays.equals(big, c)) {
 				cnt++;
 			}
 			for(int j = 0; j < 3; j++) {
