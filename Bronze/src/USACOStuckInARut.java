@@ -56,7 +56,7 @@ public class USACOStuckInARut {
 					continue;
 				}
 				
-				if(dx > dy && check(j) >= dx) {
+				if(dx > dy && check(j) >= dy) {
 					min = Math.min(min, dx);
 				}
 			}else {
@@ -64,7 +64,7 @@ public class USACOStuckInARut {
 					continue;
 				}
 				
-				if(dx < dy && check(j) >= dy) {
+				if(dx < dy && check(j) >= dx) {
 					min = Math.min(min, dy);
 				}
 			}
