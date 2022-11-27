@@ -1,5 +1,5 @@
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
+import java.io.*;
 
 public class C {
 	public static void main(String[] args) {
@@ -7,22 +7,24 @@ public class C {
 		
 		int n = in.nextInt();
 		int q = in.nextInt();
-		int[] num = new int[n];
-		int[] search = new int[q];
+		TreeMap<Integer, Integer> ts = new TreeMap<Integer, Integer>();
 		
-		for(int i = 0; i < n; i++) {
-			num[i] = in.nextInt();
-		}
-		for(int i = 0; i < q; i++) {
-			search[i] = in.nextInt();
-		}
-		
-		for(int i = 0; i < q; i++) {
-			if(Arrays.binarySearch(num, search[i]) < 0) {
-				System.out.println(Math.abs(Arrays.binarySearch(num, search[i])));
-			}else {
-				System.out.println(Arrays.binarySearch(num, search[i])+1);
+		int s = 0;
+		for(int i = 1; i <= n; i++) {
+			int num = in.nextInt();
+			if(!ts.containsKey(num)) {
+				ts.put(num, i);
 			}
 		}
+		for(int i = 0; i < q; i++) {
+			int num = in.nextInt();
+			if(ts.containsKey(num)) {
+				System.out.println(ts.get(num));
+			}else if(ts.higherKey(num) == null) {
+				System.out.println(n+1);
+			}else {
+				System.out.println(ts.get(ts.higherKey(num)));
+			}
+		} 
 	}
 }
