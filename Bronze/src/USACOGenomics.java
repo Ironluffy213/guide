@@ -5,7 +5,8 @@ public class USACOGenomics {
 	static Scanner in;
 	static PrintWriter out;
 	static int n, m;
-	static ArrayList[] spot, og;
+	static char[][] a;
+	static HashSet<Character> s, p;
 	
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		in = new Scanner(new File("cownomics.in"));
@@ -21,75 +22,43 @@ public class USACOGenomics {
 	static void init() {
 		n = in.nextInt();
 		m = in.nextInt();
-		in.nextLine();
-		spot = new ArrayList[n];
-		og = new ArrayList[n];
-		for(int i = 0; i < n; i++) {
-			spot[i] = new ArrayList<Character>();
-			String temp = in.nextLine();
-			for(int j = 0; j < m; j++) {
-				spot[i].add(temp.charAt(j));
-			}
-		}
-		for(int i = 0; i < n; i++) {
-			og[i] = new ArrayList<Character>();
-			String temp = in.nextLine();
-			for(int j = 0; j < m; j++) {
-				og[i].add(temp.charAt(j));
-			}
+		
+		a = new char[n*2][];
+		
+		for(int i = 0; i < n*2; i++) {
+			a[i] = in.next().toCharArray();
 		}
 	}
 	
 	static void solve() {
-		ArrayList<pair> possible = new ArrayList<pair>();
+		int ans = 0;
 		
 		for(int i = 0; i < m; i++) {
-			char p = (char) og[0].get(i);
-			boolean same = true;
-			for(int j = 1; j < n; j++) {
-				if((char)og[j].get(i) != p) {
-					same = false;
-					break;
-				}
-			}
-			if(same) {
-				possible.add(new pair(p, i));
+			if(check(i)) {
+				ans++;
 			}
 		}
 		
-		int cnt = 0;
-		
-		for(int i = 0; i < possible.size(); i++) {
-			boolean diff = true;
-			for(int j = 0; j < n; j++) {
-				if((char)spot[j].get(possible.get(i).pos) == possible.get(i).let) {
-					diff = false;
-				}
-			}
-			if(diff) {
-				cnt++;
-			}
-		}
-		
-		out.println(cnt);
+		out.println(ans);
 	}
 	
-	static class pair implements Comparable<pair> {
-		char let;
-		int pos;
+	static boolean check(int i) {
+		s = new HashSet<Character>();
+		p = new HashSet<Character>();
 		
-		pair(char x, int y){
-			let = x;
-			pos = y;
+		for(int j = 0; j < n; j++) {
+			s.add(a[j][i]);
 		}
 		
-		public String toString() {
-			return let+" "+pos;
+		for(int j = n; j < n*2; j++) {
+			p.add(a[j][i]);
 		}
 		
-		@Override
-		public int compareTo(pair that) {
-			return this.pos-that.pos;
+		for(char c:s) {
+			if(p.contains(c)) {
+				return false;
+			}
 		}
+		return true;
 	}
 }
